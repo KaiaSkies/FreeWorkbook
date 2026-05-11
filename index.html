@@ -1,820 +1,383 @@
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap');
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-58V16MCEYN"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
 
-.kaia-lp * { box-sizing: border-box; margin: 0; padding: 0; }
+// Only load analytics if cookies accepted
+var kaiaAnalyticsEnabled = false;
+function kaiaEnableAnalytics() {
+  if (!kaiaAnalyticsEnabled) {
+    kaiaAnalyticsEnabled = true;
+    gtag('config', 'G-58V16MCEYN');
+  }
+}
+</script>
 
-.kaia-lp {
-  --navy:  #0B1829;
-  --navy2: #0F2235;
-  --navy3: #162D45;
-  --gold:  #C8973A;
-  --gold2: #E8B85A;
-  --gold3: #F5D080;
-  --cream: #FAF4EA;
-  --sky:   #5B9BD5;
-  --white: #FFFFFF;
-  --gray:  #8A9BB0;
-  --border: rgba(200,151,58,0.25);
-  background: #0B1829;
-  color: #FFFFFF;
-  font-family: 'Lato', sans-serif;
-  font-weight: 300;
-  line-height: 1.7;
-  overflow-x: hidden;
-}
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
-.kaia-lp a { text-decoration: none; }
+<!-- ══════════════════════════════════════════
+     COOKIE BANNER
+══════════════════════════════════════════ -->
+<div id="kaia-cookie" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#0F2235;border-top:1px solid rgba(200,151,58,0.4);padding:1.2rem 2rem;display:flex;flex-wrap:wrap;align-items:center;gap:1rem;justify-content:space-between;box-shadow:0 -4px 30px rgba(0,0,0,0.4);">
+  <div style="flex:1;min-width:240px;">
+    <p style="font-family:'Lato',sans-serif;font-size:0.82rem;color:#8A9BB0;line-height:1.6;margin:0;">
+      🍪 Wir verwenden Cookies um die Nutzung unserer Website zu analysieren (Google Analytics). 
+      <a href="#kaia-datenschutz" onclick="document.getElementById('kaia-cookie').style.display='none'" style="color:#C8973A;text-decoration:underline;">Datenschutzerklärung</a>
+    </p>
+  </div>
+  <div style="display:flex;gap:0.7rem;flex-shrink:0;">
+    <button onclick="kaiaCookieDecline()" style="background:transparent;color:#8A9BB0;border:1px solid rgba(138,155,176,0.3);border-radius:3px;padding:0.55rem 1.2rem;font-family:'Lato',sans-serif;font-size:0.8rem;cursor:pointer;">Ablehnen</button>
+    <button onclick="kaiaCookieAccept()" style="background:linear-gradient(135deg,#C8973A,#E8B85A);color:#0B1829;border:none;border-radius:3px;padding:0.55rem 1.4rem;font-family:'Cinzel',serif;font-size:0.72rem;font-weight:600;letter-spacing:0.1em;cursor:pointer;">Akzeptieren</button>
+  </div>
+</div>
 
-/* ── Reveal animation ── */
-.kaia-lp .reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-.kaia-lp .reveal.visible { opacity: 1; transform: translateY(0); }
-
-/* ── Container ── */
-.kaia-lp .wrap {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-/* ── Gold divider ── */
-.kaia-lp .divider {
-  width: 70px; height: 2px;
-  background: linear-gradient(90deg, transparent, #C8973A, transparent);
-  margin: 1.4rem 0;
-}
-
-/* ════════════════ HERO ════════════════ */
-.kaia-lp .hero {
-  background: radial-gradient(ellipse at 70% 50%, rgba(91,155,213,0.07) 0%, transparent 60%),
-              #0B1829;
-  padding: 5rem 0 5rem;
-}
-
-.kaia-lp .hero-grid {
-  display: grid;
-  grid-template-columns: 1fr 400px;
-  gap: 4rem;
-  align-items: center;
-}
-
-.kaia-lp .hero-eyebrow {
-  font-family: 'Cinzel', serif;
-  font-size: 0.72rem;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  color: #C8973A;
-  margin-bottom: 1.2rem;
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-}
-.kaia-lp .hero-eyebrow::before {
-  content: '';
-  width: 36px; height: 1px;
-  background: #C8973A;
-}
-
-.kaia-lp .hero h1 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2.8rem, 5.5vw, 5rem);
-  font-weight: 300;
-  line-height: 1.1;
-  margin-bottom: 1.2rem;
-  letter-spacing: -0.01em;
-}
-.kaia-lp .hero h1 em { font-style: italic; color: #E8B85A; }
-
-.kaia-lp .hero-sub {
-  font-size: 1rem;
-  color: #8A9BB0;
-  max-width: 500px;
-  margin-bottom: 2rem;
-  line-height: 1.85;
-}
-
-.kaia-lp .hero-badges {
-  display: flex;
-  gap: 1.2rem;
-  flex-wrap: wrap;
-  margin-bottom: 2.5rem;
-}
-.kaia-lp .badge {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.8rem;
-  color: #8A9BB0;
-}
-.kaia-lp .badge-dot {
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  background: #C8973A;
-  flex-shrink: 0;
-}
-
-.kaia-lp .btn-gold {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  background: linear-gradient(135deg, #C8973A, #E8B85A);
-  color: #0B1829;
-  padding: 0.95rem 2rem;
-  border-radius: 3px;
-  font-family: 'Cinzel', serif;
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s;
-  box-shadow: 0 4px 28px rgba(200,151,58,0.3);
-}
-.kaia-lp .btn-gold:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 40px rgba(200,151,58,0.45);
-  color: #0B1829;
-}
-
-.kaia-lp .btn-outline {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  background: transparent;
-  color: #8A9BB0;
-  padding: 0.95rem 1.8rem;
-  border-radius: 3px;
-  font-size: 0.85rem;
-  border: 1px solid rgba(138,155,176,0.3);
-  transition: all 0.3s;
-  cursor: pointer;
-}
-.kaia-lp .btn-outline:hover { border-color: #C8973A; color: #C8973A; }
-
-.kaia-lp .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
-
-/* Hero image card */
-.kaia-lp .hero-card { position: relative; }
-.kaia-lp .hero-card::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  background: linear-gradient(135deg, #C8973A, transparent 60%, #5B9BD5);
-  border-radius: 5px;
-  z-index: 0;
-}
-.kaia-lp .hero-card-inner {
-  position: relative; z-index: 1;
-  background: #0F2235;
-  border-radius: 4px;
-  overflow: hidden;
-}
-.kaia-lp .hero-card-inner img {
-  width: 100%; display: block;
-  object-fit: cover; height: 500px;
-  filter: brightness(0.9) saturate(0.88);
-}
-.kaia-lp .hero-card-tag {
-  position: absolute;
-  bottom: 1.2rem; left: 1.2rem; right: 1.2rem;
-  background: rgba(11,24,41,0.88);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(200,151,58,0.25);
-  border-radius: 3px;
-  padding: 0.9rem 1.1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.9rem;
-}
-.kaia-lp .hero-avatar {
-  width: 42px; height: 42px;
-  border-radius: 50%;
-  border: 2px solid #C8973A;
-  object-fit: cover;
-  flex-shrink: 0;
-}
-.kaia-lp .hero-card-name {
-  font-family: 'Cinzel', serif;
-  font-size: 0.82rem;
-  color: #C8973A;
-  letter-spacing: 0.12em;
-}
-.kaia-lp .hero-card-role { font-size: 0.73rem; color: #8A9BB0; margin-top: 0.1rem; }
-
-/* ════════════════ TRUST BAR ════════════════ */
-.kaia-lp .trust-bar {
-  border-top: 1px solid rgba(200,151,58,0.25);
-  border-bottom: 1px solid rgba(200,151,58,0.25);
-  padding: 1.6rem 0;
-  background: rgba(15,34,53,0.7);
-}
-.kaia-lp .trust-inner {
-  display: flex;
-  justify-content: center;
-  gap: 4rem;
-  flex-wrap: wrap;
-  align-items: center;
-}
-.kaia-lp .trust-item { text-align: center; }
-.kaia-lp .trust-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2rem; font-weight: 600;
-  color: #C8973A; line-height: 1;
-}
-.kaia-lp .trust-label {
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #8A9BB0;
-  margin-top: 0.25rem;
-}
-
-/* ════════════════ SECTION SHARED ════════════════ */
-.kaia-lp section { padding: 5.5rem 0; }
-
-.kaia-lp .eyebrow {
-  font-family: 'Cinzel', serif;
-  font-size: 0.68rem;
-  letter-spacing: 0.4em;
-  text-transform: uppercase;
-  color: #C8973A;
-  text-align: center;
-  margin-bottom: 0.8rem;
-}
-.kaia-lp .sec-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1.9rem, 3.8vw, 3rem);
-  font-weight: 300;
-  text-align: center;
-  line-height: 1.2;
-  margin-bottom: 0.8rem;
-}
-.kaia-lp .sec-sub {
-  text-align: center;
-  color: #8A9BB0;
-  max-width: 580px;
-  margin: 0 auto 3.5rem;
-  font-size: 0.95rem;
-  line-height: 1.8;
-}
-.kaia-lp .gold-text { color: #E8B85A; }
-
-/* ════════════════ ABOUT ════════════════ */
-.kaia-lp .about { background: #0F2235; }
-.kaia-lp .about-grid {
-  display: grid;
-  grid-template-columns: 360px 1fr;
-  gap: 4.5rem;
-  align-items: center;
-}
-.kaia-lp .about-img-wrap { position: relative; }
-.kaia-lp .about-img-wrap::before {
-  content: '';
-  position: absolute;
-  top: -10px; left: -10px; right: 10px; bottom: 10px;
-  border: 1px solid rgba(200,151,58,0.25);
-  border-radius: 3px; z-index: 0;
-}
-.kaia-lp .about-img-wrap img {
-  width: 100%; border-radius: 3px; display: block;
-  object-fit: cover; height: 460px;
-  position: relative; z-index: 1;
-  filter: brightness(0.88) saturate(0.85);
-}
-.kaia-lp .about-content h2 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2.6rem; font-weight: 300;
-  line-height: 1.2; margin-bottom: 1.2rem;
-}
-.kaia-lp .about-content p {
-  color: #8A9BB0; margin-bottom: 1.1rem;
-  font-size: 0.95rem; line-height: 1.85;
-}
-.kaia-lp .quote-block {
-  border-left: 2px solid #C8973A;
-  padding: 0.9rem 1.4rem;
-  margin: 1.8rem 0;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.25rem; font-style: italic;
-  color: #FAF4EA; line-height: 1.6;
-}
-
-/* ════════════════ FREE WORKBOOK ════════════════ */
-.kaia-lp .free-sec {
-  background: linear-gradient(180deg, #0B1829 0%, #0F2235 100%);
-}
-.kaia-lp .free-grid {
-  display: grid;
-  grid-template-columns: 1fr 390px;
-  gap: 4.5rem;
-  align-items: center;
-}
-.kaia-lp .free-content h2 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2.6rem; font-weight: 300;
-  line-height: 1.2; margin-bottom: 1.2rem;
-}
-.kaia-lp .free-content p { color: #8A9BB0; margin-bottom: 1.2rem; line-height: 1.85; }
-
-/* Workbook card */
-.kaia-lp .wb-card {
-  background: linear-gradient(135deg, #162D45, #0F2235);
-  border: 1px solid rgba(200,151,58,0.25);
-  border-radius: 4px;
-  padding: 2.2rem;
-  box-shadow: 0 30px 70px rgba(0,0,0,0.45);
-  position: relative;
-  overflow: hidden;
-}
-.kaia-lp .wb-card::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #C8973A, #E8B85A, #C8973A);
-}
-.kaia-lp .wb-tag {
-  font-family: 'Cinzel', serif;
-  font-size: 0.62rem; letter-spacing: 0.3em;
-  text-transform: uppercase; color: #C8973A;
-  margin-bottom: 1.6rem;
-}
-.kaia-lp .wb-card h3 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2rem; font-weight: 300;
-  line-height: 1.2; margin-bottom: 0.4rem;
-}
-.kaia-lp .wb-sub {
-  font-size: 0.8rem; color: #8A9BB0;
-  letter-spacing: 0.07em; margin-bottom: 1.6rem;
-  padding-bottom: 1.4rem;
-  border-bottom: 1px solid rgba(200,151,58,0.15);
-}
-.kaia-lp .wb-list { list-style: none; margin-bottom: 1.8rem; }
-.kaia-lp .wb-list li {
-  font-size: 0.86rem; color: #8A9BB0;
-  padding: 0.4rem 0;
-  display: flex; align-items: center; gap: 0.6rem;
-  border-bottom: 1px solid rgba(200,151,58,0.07);
-}
-.kaia-lp .wb-list li::before { content: '✦'; color: #C8973A; font-size: 0.55rem; flex-shrink: 0; }
-.kaia-lp .wb-price {
-  display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 1.4rem;
-}
-.kaia-lp .price-big {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2.3rem; color: #C8973A; font-weight: 600;
-}
-.kaia-lp .price-note { font-size: 0.78rem; color: #8A9BB0; letter-spacing: 0.08em; }
-
-/* Email form */
-.kaia-lp .email-form { margin-top: 2rem; }
-.kaia-lp .form-row { display: flex; gap: 0; margin-bottom: 0.7rem; }
-.kaia-lp .form-input {
-  flex: 1;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(200,151,58,0.25);
-  border-right: none;
-  border-radius: 3px 0 0 3px;
-  padding: 0.88rem 1.1rem;
-  color: #FFFFFF;
-  font-family: 'Lato', sans-serif;
-  font-size: 0.88rem;
-  outline: none;
-  transition: border-color 0.3s;
-}
-.kaia-lp .form-input::placeholder { color: #8A9BB0; }
-.kaia-lp .form-input:focus { border-color: #C8973A; }
-.kaia-lp .form-btn {
-  background: linear-gradient(135deg, #C8973A, #E8B85A);
-  color: #0B1829; border: none;
-  border-radius: 0 3px 3px 0;
-  padding: 0.88rem 1.4rem;
-  font-family: 'Cinzel', serif;
-  font-size: 0.72rem; font-weight: 600;
-  letter-spacing: 0.1em; cursor: pointer;
-  white-space: nowrap; transition: all 0.3s;
-}
-.kaia-lp .form-btn:hover { background: linear-gradient(135deg, #E8B85A, #F5D080); }
-.kaia-lp .form-note { font-size: 0.73rem; color: #8A9BB0; letter-spacing: 0.04em; }
-
-/* ════════════════ PREMIUM ════════════════ */
-.kaia-lp .premium-sec {
-  background: radial-gradient(ellipse at 50% 0%, rgba(200,151,58,0.05) 0%, transparent 65%),
-              #0B1829;
-  border-top: 1px solid rgba(200,151,58,0.2);
-}
-.kaia-lp .prem-badge {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  background: rgba(200,151,58,0.1);
-  border: 1px solid rgba(200,151,58,0.25);
-  border-radius: 50px;
-  padding: 0.35rem 1.1rem;
-  font-family: 'Cinzel', serif;
-  font-size: 0.62rem; letter-spacing: 0.3em;
-  text-transform: uppercase; color: #C8973A;
-  margin-bottom: 1.2rem;
-}
-.kaia-lp .prem-header { text-align: center; margin-bottom: 3.5rem; }
-
-/* Feature grid */
-.kaia-lp .feat-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-  background: rgba(200,151,58,0.15);
-  border-radius: 4px;
-  overflow: hidden;
-  margin-bottom: 3rem;
-}
-.kaia-lp .feat-card {
-  background: #0F2235;
-  padding: 2.2rem;
-  transition: background 0.3s;
-}
-.kaia-lp .feat-card:hover { background: #162D45; }
-.kaia-lp .feat-icon { font-size: 1.7rem; margin-bottom: 0.9rem; }
-.kaia-lp .feat-card h3 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.3rem; font-weight: 400;
-  color: #FAF4EA; margin-bottom: 0.6rem;
-}
-.kaia-lp .feat-card p { font-size: 0.85rem; color: #8A9BB0; line-height: 1.7; }
-
-/* Compare table */
-.kaia-lp .cmp-table {
-  background: #0F2235;
-  border: 1px solid rgba(200,151,58,0.2);
-  border-radius: 4px;
-  overflow: hidden;
-  margin-bottom: 3rem;
-}
-.kaia-lp .cmp-head {
-  display: grid;
-  grid-template-columns: 1fr 130px 130px;
-  background: #162D45;
-  border-bottom: 1px solid rgba(200,151,58,0.2);
-}
-.kaia-lp .cmp-head div {
-  padding: 0.9rem 1.3rem;
-  font-family: 'Cinzel', serif;
-  font-size: 0.68rem; letter-spacing: 0.2em;
-  text-transform: uppercase; color: #8A9BB0;
-}
-.kaia-lp .cmp-head .col-p { color: #C8973A; background: rgba(200,151,58,0.07); }
-.kaia-lp .cmp-row {
-  display: grid;
-  grid-template-columns: 1fr 130px 130px;
-  border-bottom: 1px solid rgba(200,151,58,0.05);
-  align-items: center;
-}
-.kaia-lp .cmp-row:last-child { border-bottom: none; }
-.kaia-lp .cmp-row:hover { background: rgba(255,255,255,0.015); }
-.kaia-lp .cmp-row div { padding: 0.85rem 1.3rem; font-size: 0.86rem; color: #8A9BB0; }
-.kaia-lp .cmp-row .col-p { background: rgba(200,151,58,0.04); }
-.kaia-lp .ck { color: #C8973A; font-size: 0.95rem; }
-.kaia-lp .cx { color: rgba(138,155,176,0.35); font-size: 0.85rem; }
-
-/* Premium CTA */
-.kaia-lp .prem-cta {
-  background: linear-gradient(135deg, #162D45, #0F2235);
-  border: 1px solid rgba(200,151,58,0.25);
-  border-radius: 4px;
-  padding: 3rem;
-  text-align: center;
-  position: relative; overflow: hidden;
-}
-.kaia-lp .prem-cta::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #C8973A, #E8B85A, #C8973A);
-}
-.kaia-lp .prem-cta h3 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2.3rem; font-weight: 300; margin-bottom: 0.5rem;
-}
-.kaia-lp .prem-cta p { color: #8A9BB0; margin-bottom: 1.8rem; font-size: 0.92rem; }
-.kaia-lp .cs-label {
-  display: inline-block;
-  background: rgba(200,151,58,0.1);
-  border: 1px solid #C8973A;
-  color: #C8973A;
-  padding: 0.55rem 1.8rem;
-  border-radius: 3px;
-  font-family: 'Cinzel', serif;
-  font-size: 0.75rem; letter-spacing: 0.25em;
-  text-transform: uppercase;
-}
-.kaia-lp .notify-form {
-  display: flex; gap: 0;
-  max-width: 420px; margin: 1.8rem auto 0;
-}
-.kaia-lp .notify-form input {
-  flex: 1;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(200,151,58,0.25);
-  border-right: none;
-  border-radius: 3px 0 0 3px;
-  padding: 0.82rem 1.1rem;
-  color: #FFFFFF;
-  font-family: 'Lato', sans-serif;
-  font-size: 0.86rem; outline: none;
-}
-.kaia-lp .notify-form input::placeholder { color: #8A9BB0; }
-.kaia-lp .notify-form button {
-  background: transparent; color: #C8973A;
-  border: 1px solid #C8973A;
-  border-radius: 0 3px 3px 0;
-  padding: 0.82rem 1.3rem;
-  font-family: 'Cinzel', serif;
-  font-size: 0.7rem; letter-spacing: 0.1em;
-  cursor: pointer; white-space: nowrap; transition: all 0.3s;
-}
-.kaia-lp .notify-form button:hover { background: #C8973A; color: #0B1829; }
-
-/* ════════════════ TESTIMONIALS ════════════════ */
-.kaia-lp .testi-sec {
-  background: #0F2235;
-  border-top: 1px solid rgba(200,151,58,0.2);
-}
-.kaia-lp .testi-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.4rem;
-}
-.kaia-lp .testi-card {
-  background: #0B1829;
-  border: 1px solid rgba(200,151,58,0.2);
-  border-radius: 3px; padding: 1.8rem;
-  position: relative;
-}
-.kaia-lp .testi-card::before {
-  content: '"';
-  position: absolute; top: 0.8rem; right: 1.2rem;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 3.5rem;
-  color: rgba(200,151,58,0.12); line-height: 1;
-}
-.kaia-lp .stars { color: #C8973A; font-size: 0.72rem; letter-spacing: 0.1em; margin-bottom: 0.9rem; }
-.kaia-lp .testi-text {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1rem; font-style: italic;
-  color: #FAF4EA; line-height: 1.7; margin-bottom: 1.3rem;
-}
-.kaia-lp .testi-author { font-size: 0.78rem; color: #8A9BB0; }
-.kaia-lp .testi-author strong {
-  color: #C8973A; font-weight: 400;
-  display: block; margin-bottom: 0.15rem;
-}
-
-/* ════════════════ RESPONSIVE ════════════════ */
-@media (max-width: 900px) {
-  .kaia-lp .hero-grid,
-  .kaia-lp .about-grid,
-  .kaia-lp .free-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-  .kaia-lp .hero-card-inner img { height: 360px; }
-  .kaia-lp .about-img-wrap img { height: 320px; }
-  .kaia-lp .feat-grid { grid-template-columns: 1fr 1fr; }
-  .kaia-lp .testi-grid { grid-template-columns: 1fr; }
-  .kaia-lp .trust-inner { gap: 2rem; }
-  .kaia-lp .cmp-head,
-  .kaia-lp .cmp-row { grid-template-columns: 1fr 100px 100px; }
-}
-@media (max-width: 600px) {
-  .kaia-lp .hero h1 { font-size: 2.3rem; }
-  .kaia-lp .feat-grid { grid-template-columns: 1fr; }
-  .kaia-lp .form-row { flex-direction: column; }
-  .kaia-lp .form-input { border-right: 1px solid rgba(200,151,58,0.25); border-radius: 3px; margin-bottom: 0.5rem; }
-  .kaia-lp .form-btn { border-radius: 3px; }
-  .kaia-lp .notify-form { flex-direction: column; }
-  .kaia-lp .notify-form input,
-  .kaia-lp .notify-form button { border-radius: 3px; border: 1px solid rgba(200,151,58,0.25); margin-bottom: 0.4rem; }
-  .kaia-lp .notify-form button { border-color: #C8973A; }
-  .kaia-lp .prem-cta { padding: 2rem 1.2rem; }
-  .kaia-lp .cmp-head div,
-  .kaia-lp .cmp-row div { padding: 0.65rem 0.7rem; font-size: 0.78rem; }
-}
-</style>
-
-<div class="kaia-lp">
+<!-- ══════════════════════════════════════════
+     MAIN WRAPPER
+══════════════════════════════════════════ -->
+<div id="kaia-wrap" style="background:#0B1829;color:#FFFFFF;font-family:'Lato',sans-serif;font-weight:300;line-height:1.7;overflow-x:hidden;">
 
   <!-- ── HERO ── -->
-  <div class="hero">
-    <div class="wrap">
-      <div class="hero-grid">
-        <div class="reveal">
-          <div class="hero-eyebrow">From a Flight Attendant Who Knows</div>
-          <h1>Stop Dreading.<br>Start <em>Flying.</em></h1>
-          <p class="hero-sub">Evidence-based tools and insider knowledge from someone who has spent thousands of hours at 35,000 feet — and was once just as afraid as you.</p>
-          <div class="hero-badges">
-            <div class="badge"><div class="badge-dot"></div>CBT-Based Techniques</div>
-            <div class="badge"><div class="badge-dot"></div>Real Crew Insights</div>
-            <div class="badge"><div class="badge-dot"></div>Instant Download</div>
-          </div>
-          <div class="hero-btns">
-            <a href="#kaia-free" class="btn-gold">✦ Get the Free Workbook</a>
-            <a href="#kaia-premium" class="btn-outline">View Premium →</a>
-          </div>
+  <div style="background:linear-gradient(135deg,#0B1829 60%,#0F2235 100%);padding:4rem 1.5rem;">
+    <div style="max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:3rem;align-items:center;">
+
+      <div style="flex:1;min-width:280px;">
+        <div style="font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.35em;text-transform:uppercase;color:#C8973A;margin-bottom:1.2rem;display:flex;align-items:center;gap:0.8rem;">
+          <span style="width:36px;height:1px;background:#C8973A;display:inline-block;"></span>
+          Guided by an AI Fear of Flying Coach
         </div>
-        <div class="hero-card reveal">
-          <div class="hero-card-inner">
-            <img src="Sarah_zu_Kaia_2K_202605111421.jpeg" alt="Kaia – Fear of Flying Coach" onerror="this.style.minHeight='500px';this.style.background='#162D45'">
-            <div class="hero-card-tag">
-              <img class="hero-avatar" src="Name_tag__Kaia_2K_202605111421.jpeg" alt="Kaia" onerror="this.style.display='none'">
-              <div>
-                <div class="hero-card-name">KAIA</div>
-                <div class="hero-card-role">Cabin Crew · Fear of Flying Coach · 8+ Years</div>
-              </div>
+        <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,5vw,4.8rem);font-weight:300;line-height:1.1;margin-bottom:1.2rem;">
+          Stop Dreading.<br><span style="font-style:italic;color:#E8B85A;">Start Flying.</span>
+        </h1>
+        <p style="font-size:1rem;color:#8A9BB0;max-width:480px;margin-bottom:2rem;line-height:1.85;">
+          Evidence-based tools drawn from real aviation expertise and cognitive behavioural therapy — delivered through Kaia, your AI-powered fear of flying guide.
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:1.2rem;margin-bottom:2.2rem;">
+          <span style="display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;color:#8A9BB0;"><span style="width:5px;height:5px;border-radius:50%;background:#C8973A;display:inline-block;"></span>CBT-Based Techniques</span>
+          <span style="display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;color:#8A9BB0;"><span style="width:5px;height:5px;border-radius:50%;background:#C8973A;display:inline-block;"></span>Real Aviation Insights</span>
+          <span style="display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;color:#8A9BB0;"><span style="width:5px;height:5px;border-radius:50%;background:#C8973A;display:inline-block;"></span>AI-Powered Guide</span>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;">
+          <a href="#kaia-free" style="display:inline-flex;align-items:center;gap:0.6rem;background:linear-gradient(135deg,#C8973A,#E8B85A);color:#0B1829;padding:0.95rem 2rem;border-radius:3px;font-family:'Cinzel',serif;font-size:0.78rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;box-shadow:0 4px 28px rgba(200,151,58,0.3);">✦ Get the Free Workbook</a>
+          <a href="#kaia-premium" style="display:inline-flex;align-items:center;gap:0.5rem;color:#8A9BB0;padding:0.95rem 1.5rem;border-radius:3px;font-size:0.85rem;border:1px solid rgba(138,155,176,0.3);text-decoration:none;">View Premium →</a>
+        </div>
+      </div>
+
+      <div style="flex:0 0 360px;min-width:260px;position:relative;">
+        <div style="border:2px solid #C8973A;border-radius:4px;overflow:hidden;position:relative;">
+          <img src="Sarah_zu_Kaia_2K_202605111421.jpeg" alt="Kaia – AI Fear of Flying Guide" style="width:100%;display:block;object-fit:cover;height:460px;filter:brightness(0.9) saturate(0.88);" onerror="this.style.minHeight='460px';this.style.background='#162D45';">
+          <div style="position:absolute;bottom:1rem;left:1rem;right:1rem;background:rgba(11,24,41,0.92);border:1px solid rgba(200,151,58,0.3);border-radius:3px;padding:0.85rem 1rem;display:flex;align-items:center;gap:0.8rem;">
+            <img src="Name_tag__Kaia_2K_202605111421.jpeg" alt="Kaia" style="width:40px;height:40px;border-radius:50%;border:2px solid #C8973A;object-fit:cover;flex-shrink:0;" onerror="this.style.display='none'">
+            <div>
+              <div style="font-family:'Cinzel',serif;font-size:0.8rem;color:#C8973A;letter-spacing:0.12em;">KAIA <span style="font-size:0.6rem;background:rgba(200,151,58,0.15);border:1px solid rgba(200,151,58,0.4);border-radius:2px;padding:0.1rem 0.4rem;letter-spacing:0.08em;">AI</span></div>
+              <div style="font-size:0.72rem;color:#8A9BB0;margin-top:0.1rem;">AI-Powered Fear of Flying Coach</div>
             </div>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 
   <!-- ── TRUST BAR ── -->
-  <div class="trust-bar reveal">
-    <div class="wrap">
-      <div class="trust-inner">
-        <div class="trust-item"><div class="trust-num">8+</div><div class="trust-label">Years Cabin Crew</div></div>
-        <div class="trust-item"><div class="trust-num">1 in 4</div><div class="trust-label">People Fear Flying</div></div>
-        <div class="trust-item"><div class="trust-num">100%</div><div class="trust-label">Evidence-Based</div></div>
-        <div class="trust-item"><div class="trust-num">Free</div><div class="trust-label">To Get Started</div></div>
+  <div style="border-top:1px solid rgba(200,151,58,0.25);border-bottom:1px solid rgba(200,151,58,0.25);padding:1.6rem 1.5rem;background:#0F2235;">
+    <div style="max-width:1100px;margin:0 auto;display:flex;justify-content:center;flex-wrap:wrap;gap:3rem;align-items:center;">
+      <div style="text-align:center;"><div style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;color:#C8973A;line-height:1;">1 in 4</div><div style="font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:#8A9BB0;margin-top:0.2rem;">People Fear Flying</div></div>
+      <div style="text-align:center;"><div style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;color:#C8973A;line-height:1;">100%</div><div style="font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:#8A9BB0;margin-top:0.2rem;">Evidence-Based</div></div>
+      <div style="text-align:center;"><div style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;color:#C8973A;line-height:1;">AI</div><div style="font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:#8A9BB0;margin-top:0.2rem;">Powered Guide</div></div>
+      <div style="text-align:center;"><div style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;color:#C8973A;line-height:1;">Free</div><div style="font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:#8A9BB0;margin-top:0.2rem;">To Get Started</div></div>
+    </div>
+  </div>
+
+  <!-- ── ABOUT KAIA ── -->
+  <div style="background:#0F2235;padding:5rem 1.5rem;">
+    <div style="max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:4rem;align-items:center;">
+
+      <div style="flex:0 0 340px;min-width:240px;position:relative;">
+        <div style="position:absolute;top:-10px;left:-10px;right:10px;bottom:10px;border:1px solid rgba(200,151,58,0.25);border-radius:3px;"></div>
+        <img src="A_kind_female_flight_attendant_202605111422.jpeg" alt="Kaia AI Guide" style="width:100%;border-radius:3px;display:block;object-fit:cover;height:440px;position:relative;filter:brightness(0.88) saturate(0.85);" onerror="this.style.background='#162D45';this.style.minHeight='440px'">
+        <!-- AI Badge -->
+        <div style="position:absolute;top:1rem;right:1rem;background:rgba(11,24,41,0.9);border:1px solid rgba(200,151,58,0.5);border-radius:3px;padding:0.35rem 0.8rem;font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.2em;color:#C8973A;">✦ AI CHARACTER</div>
+      </div>
+
+      <div style="flex:1;min-width:260px;">
+        <div style="font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.4em;text-transform:uppercase;color:#C8973A;margin-bottom:0.7rem;">Meet Your Guide</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:2.6rem;font-weight:300;line-height:1.2;margin-bottom:1rem;">Hi, I'm <span style="color:#E8B85A;">Kaia.</span></h2>
+        <div style="width:70px;height:2px;background:linear-gradient(90deg,transparent,#C8973A,transparent);margin-bottom:1.3rem;"></div>
+
+        <!-- Subtle AI disclosure -->
+        <div style="background:rgba(200,151,58,0.07);border:1px solid rgba(200,151,58,0.2);border-radius:3px;padding:0.7rem 1rem;margin-bottom:1.3rem;display:flex;align-items:flex-start;gap:0.6rem;">
+          <span style="color:#C8973A;font-size:0.8rem;flex-shrink:0;margin-top:0.1rem;">ℹ</span>
+          <p style="font-size:0.78rem;color:#8A9BB0;line-height:1.6;margin:0;">Kaia is an AI-created character. The workbook content is developed from real aviation expertise and evidence-based psychology.</p>
+        </div>
+
+        <p style="color:#8A9BB0;margin-bottom:1rem;font-size:0.95rem;line-height:1.85;">I was created to be the guide that nervous flyers deserve — someone with deep knowledge of aviation, psychology, and the art of staying calm at 35,000 feet.</p>
+        <p style="color:#8A9BB0;margin-bottom:1rem;font-size:0.95rem;line-height:1.85;">The techniques in this workbook are drawn from Cognitive Behavioural Therapy and real cabin crew experience. They work — whether your guide is human or AI.</p>
+        <div style="border-left:2px solid #C8973A;padding:0.9rem 1.3rem;margin:1.6rem 0;font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;color:#FAF4EA;line-height:1.6;">"Fear of flying is one of the most treatable anxieties there is. You just need the right tools — and a little courage to begin."</div>
+        <a href="#kaia-free" style="display:inline-flex;align-items:center;gap:0.6rem;background:linear-gradient(135deg,#C8973A,#E8B85A);color:#0B1829;padding:0.95rem 2rem;border-radius:3px;font-family:'Cinzel',serif;font-size:0.78rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;">✦ Download Free Workbook</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── FREE WORKBOOK ── -->
+  <div id="kaia-free" style="background:linear-gradient(180deg,#0B1829 0%,#0F2235 100%);padding:5rem 1.5rem;">
+    <div style="max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:4rem;align-items:center;">
+
+      <div style="flex:1;min-width:260px;">
+        <div style="font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.4em;text-transform:uppercase;color:#C8973A;margin-bottom:0.7rem;">Start Here — No Cost</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:2.6rem;font-weight:300;line-height:1.2;margin-bottom:1rem;">The Free<br><span style="color:#E8B85A;">Fear of Flying</span><br>Workbook</h2>
+        <div style="width:70px;height:2px;background:linear-gradient(90deg,transparent,#C8973A,transparent);margin-bottom:1.3rem;"></div>
+        <p style="color:#8A9BB0;margin-bottom:1rem;line-height:1.85;">A 10-page evidence-based starter guide to help you understand your fear, rate your anxiety triggers, and begin using proven calming techniques before your next flight.</p>
+
+        <!-- Placeholder for Systeme.io form -->
+        <div id="kaia-form-placeholder" style="margin-top:2rem;">
+          <div style="display:flex;flex-wrap:wrap;gap:0;margin-bottom:0.7rem;">
+            <input id="kaiaEmail" type="email" placeholder="Your email address" style="flex:1;min-width:180px;background:rgba(255,255,255,0.05);border:1px solid rgba(200,151,58,0.3);border-right:none;border-radius:3px 0 0 3px;padding:0.88rem 1rem;color:#FFFFFF;font-family:'Lato',sans-serif;font-size:0.88rem;outline:none;">
+            <button onclick="kaiaDownload()" style="background:linear-gradient(135deg,#C8973A,#E8B85A);color:#0B1829;border:none;border-radius:0 3px 3px 0;padding:0.88rem 1.3rem;font-family:'Cinzel',serif;font-size:0.7rem;font-weight:600;letter-spacing:0.1em;cursor:pointer;white-space:nowrap;">GET IT FREE</button>
+          </div>
+          <p style="font-size:0.73rem;color:#8A9BB0;">✦ Instant download &nbsp;·&nbsp; No spam, ever &nbsp;·&nbsp; Unsubscribe anytime</p>
+        </div>
+        <!-- END Systeme.io placeholder -->
+
+      </div>
+
+      <div style="flex:0 0 360px;min-width:260px;">
+        <div style="background:linear-gradient(135deg,#162D45,#0F2235);border:1px solid rgba(200,151,58,0.25);border-radius:4px;padding:2.2rem;box-shadow:0 30px 70px rgba(0,0,0,0.4);position:relative;overflow:hidden;">
+          <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#C8973A,#E8B85A,#C8973A);"></div>
+          <div style="font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.3em;text-transform:uppercase;color:#C8973A;margin-bottom:1.5rem;">Free Edition · Instant Download</div>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:300;line-height:1.2;margin-bottom:0.4rem;">Fear of Flying<br><span style="color:#E8B85A;">Workbook</span></h3>
+          <p style="font-size:0.78rem;color:#8A9BB0;letter-spacing:0.07em;margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid rgba(200,151,58,0.15);">Guided by Kaia · AI Fear of Flying Coach</p>
+          <ul style="list-style:none;margin-bottom:1.6rem;">
+            <li style="font-size:0.85rem;color:#8A9BB0;padding:0.4rem 0;display:flex;align-items:center;gap:0.6rem;border-bottom:1px solid rgba(200,151,58,0.07);"><span style="color:#C8973A;font-size:0.55rem;">✦</span>Understanding your fear &amp; triggers</li>
+            <li style="font-size:0.85rem;color:#8A9BB0;padding:0.4rem 0;display:flex;align-items:center;gap:0.6rem;border-bottom:1px solid rgba(200,151,58,0.07);"><span style="color:#C8973A;font-size:0.55rem;">✦</span>Personal anxiety profile scales</li>
+            <li style="font-size:0.85rem;color:#8A9BB0;padding:0.4rem 0;display:flex;align-items:center;gap:0.6rem;border-bottom:1px solid rgba(200,151,58,0.07);"><span style="color:#C8973A;font-size:0.55rem;">✦</span>The 4-7-8 breathing method</li>
+            <li style="font-size:0.85rem;color:#8A9BB0;padding:0.4rem 0;display:flex;align-items:center;gap:0.6rem;border-bottom:1px solid rgba(200,151,58,0.07);"><span style="color:#C8973A;font-size:0.55rem;">✦</span>Thought-challenge exercise (CBT)</li>
+            <li style="font-size:0.85rem;color:#8A9BB0;padding:0.4rem 0;display:flex;align-items:center;gap:0.6rem;border-bottom:1px solid rgba(200,151,58,0.07);"><span style="color:#C8973A;font-size:0.55rem;">✦</span>In-flight action plan (6 steps)</li>
+            <li style="font-size:0.85rem;color:#8A9BB0;padding:0.4rem 0;display:flex;align-items:center;gap:0.6rem;"><span style="color:#C8973A;font-size:0.55rem;">✦</span>Pre-flight checklist</li>
+          </ul>
+          <div style="display:flex;align-items:baseline;gap:0.5rem;margin-bottom:1.3rem;">
+            <span style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;color:#C8973A;font-weight:600;">FREE</span>
+            <span style="font-size:0.76rem;color:#8A9BB0;letter-spacing:0.08em;">/ Instant PDF Download</span>
+          </div>
+          <button onclick="document.getElementById('kaiaEmail').focus()" style="width:100%;background:linear-gradient(135deg,#C8973A,#E8B85A);color:#0B1829;border:none;border-radius:3px;padding:0.95rem;font-family:'Cinzel',serif;font-size:0.78rem;font-weight:600;letter-spacing:0.15em;cursor:pointer;">✦ Download Now</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── PREMIUM ── -->
+  <div id="kaia-premium" style="background:#0B1829;border-top:1px solid rgba(200,151,58,0.2);padding:5rem 1.5rem;">
+    <div style="max-width:1100px;margin:0 auto;">
+      <div style="text-align:center;margin-bottom:3.5rem;">
+        <div style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(200,151,58,0.1);border:1px solid rgba(200,151,58,0.25);border-radius:50px;padding:0.35rem 1.1rem;font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.3em;text-transform:uppercase;color:#C8973A;margin-bottom:1.2rem;">✦ Coming Soon ✦</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.9rem,3.5vw,3rem);font-weight:300;text-align:center;line-height:1.2;margin-bottom:0.8rem;">The Premium <span style="color:#E8B85A;">Fear of Flying Workbook</span></h2>
+        <p style="text-align:center;color:#8A9BB0;max-width:560px;margin:0 auto;font-size:0.95rem;line-height:1.8;">A comprehensive 50+ page deep-dive with everything you need to fly with genuine, lasting confidence.</p>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:2px;background:rgba(200,151,58,0.15);border-radius:4px;overflow:hidden;margin-bottom:3rem;">
+        <div style="flex:1;min-width:280px;background:#0F2235;padding:2rem;"><div style="font-size:1.6rem;margin-bottom:0.8rem;">🧠</div><h3 style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:400;color:#FAF4EA;margin-bottom:0.5rem;">Full CBT Programme</h3><p style="font-size:0.84rem;color:#8A9BB0;line-height:1.7;">Complete Cognitive Behavioural Therapy exercises — real guided practice, not just explanations.</p></div>
+        <div style="flex:1;min-width:280px;background:#0F2235;padding:2rem;"><div style="font-size:1.6rem;margin-bottom:0.8rem;">🪜</div><h3 style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:400;color:#FAF4EA;margin-bottom:0.5rem;">Fear Ladder &amp; Exposure</h3><p style="font-size:0.84rem;color:#8A9BB0;line-height:1.7;">Build your personalised exposure hierarchy using the gold-standard therapeutic approach.</p></div>
+        <div style="flex:1;min-width:280px;background:#0F2235;padding:2rem;"><div style="font-size:1.6rem;margin-bottom:0.8rem;">🧘</div><h3 style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:400;color:#FAF4EA;margin-bottom:0.5rem;">Meditation Scripts</h3><p style="font-size:0.84rem;color:#8A9BB0;line-height:1.7;">Guided visualisation scripts written specifically for takeoff, turbulence, and landing.</p></div>
+        <div style="flex:1;min-width:280px;background:#0F2235;padding:2rem;"><div style="font-size:1.6rem;margin-bottom:0.8rem;">✈️</div><h3 style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:400;color:#FAF4EA;margin-bottom:0.5rem;">Aviation Insider Knowledge</h3><p style="font-size:0.84rem;color:#8A9BB0;line-height:1.7;">Every sound explained. What turbulence really means. What crew want you to know.</p></div>
+        <div style="flex:1;min-width:280px;background:#0F2235;padding:2rem;"><div style="font-size:1.6rem;margin-bottom:0.8rem;">📓</div><h3 style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:400;color:#FAF4EA;margin-bottom:0.5rem;">Journal &amp; Progress Tracker</h3><p style="font-size:0.84rem;color:#8A9BB0;line-height:1.7;">Dedicated pages to track every flight and witness your own transformation over time.</p></div>
+        <div style="flex:1;min-width:280px;background:#0F2235;padding:2rem;"><div style="font-size:1.6rem;margin-bottom:0.8rem;">🌙</div><h3 style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:400;color:#FAF4EA;margin-bottom:0.5rem;">Sleep &amp; Nutrition Guide</h3><p style="font-size:0.84rem;color:#8A9BB0;line-height:1.7;">What to eat, drink, and do the night before your flight for the best possible foundation.</p></div>
+      </div>
+
+      <div style="background:linear-gradient(135deg,#162D45,#0F2235);border:1px solid rgba(200,151,58,0.25);border-radius:4px;padding:3rem;text-align:center;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#C8973A,#E8B85A,#C8973A);"></div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;margin-bottom:0.5rem;">Be the First to Know</h3>
+        <p style="color:#8A9BB0;margin-bottom:1.6rem;font-size:0.92rem;">The Premium Workbook is coming soon. Leave your email and get early access at a special launch price.</p>
+        <div style="display:inline-block;background:rgba(200,151,58,0.1);border:1px solid #C8973A;color:#C8973A;padding:0.55rem 1.8rem;border-radius:3px;font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.25em;text-transform:uppercase;margin-bottom:1.5rem;">✦ Coming Soon ✦</div>
+        <div style="display:flex;justify-content:center;gap:0;max-width:400px;margin:0 auto;">
+          <input id="kaiaNotify" type="email" placeholder="your@email.com" style="flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(200,151,58,0.25);border-right:none;border-radius:3px 0 0 3px;padding:0.82rem 1rem;color:#FFFFFF;font-family:'Lato',sans-serif;font-size:0.86rem;outline:none;">
+          <button onclick="kaiaNotifyMe()" style="background:transparent;color:#C8973A;border:1px solid #C8973A;border-radius:0 3px 3px 0;padding:0.82rem 1.2rem;font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.1em;cursor:pointer;white-space:nowrap;">Notify Me</button>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- ── ABOUT ── -->
-  <section class="about">
-    <div class="wrap">
-      <div class="about-grid">
-        <div class="about-img-wrap reveal">
-          <img src="A_kind_female_flight_attendant_202605111422.jpeg" alt="Kaia helping a nervous passenger" onerror="this.style.background='#162D45'">
-        </div>
-        <div class="about-content reveal">
-          <div class="eyebrow" style="text-align:left; margin-bottom:0.6rem;">Meet Your Guide</div>
-          <h2>Hi, I'm <span class="gold-text">Kaia.</span></h2>
-          <div class="divider"></div>
-          <p>I have been a flight attendant for over eight years, flying hundreds of routes across Europe, Asia, and the Americas. Every single day I watch passengers board with white knuckles and shallow breath.</p>
-          <p>Before I joined the crew, I was terrified of flying myself. What changed everything was understanding exactly what happens in your body during anxiety — and learning that fear, no matter how overwhelming, can be navigated.</p>
-          <div class="quote-block">"I have held the hands of hundreds of nervous flyers at 35,000 feet. This workbook is what I wish I could give every single one of them."</div>
-          <a href="#kaia-free" class="btn-gold">✦ Download Free Workbook</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── FREE WORKBOOK ── -->
-  <section class="free-sec" id="kaia-free">
-    <div class="wrap">
-      <div class="free-grid">
-        <div class="free-content reveal">
-          <div class="eyebrow" style="text-align:left; margin-bottom:0.6rem;">Start Here — No Cost</div>
-          <h2>The Free<br><span class="gold-text">Fear of Flying</span><br>Workbook</h2>
-          <div class="divider"></div>
-          <p>A 10-page evidence-based starter guide to help you understand your fear, rate your anxiety triggers, and begin using proven calming techniques before your next flight.</p>
-          <p style="color:#8A9BB0; font-size:0.88rem;">Created by a cabin crew professional who experienced fear of flying firsthand — and overcame it.</p>
-          <div class="email-form">
-            <div class="form-row">
-              <input class="form-input" type="email" placeholder="Your email address" id="kaiaEmail">
-              <button class="form-btn" onclick="kaiaDownload()">GET IT FREE</button>
-            </div>
-            <p class="form-note">✦ Instant download &nbsp;·&nbsp; No spam, ever &nbsp;·&nbsp; Unsubscribe anytime</p>
-          </div>
-        </div>
-        <div class="reveal">
-          <div class="wb-card">
-            <div class="wb-tag">Free Edition · Instant Download</div>
-            <h3>Fear of Flying<br><span class="gold-text">Workbook</span></h3>
-            <p class="wb-sub">Guided by Kaia · Cabin Crew & Coach</p>
-            <ul class="wb-list">
-              <li>Understanding your fear & triggers</li>
-              <li>Personal anxiety profile scales</li>
-              <li>The 4-7-8 breathing method</li>
-              <li>Thought-challenge exercise (CBT)</li>
-              <li>In-flight action plan (6 steps)</li>
-              <li>Pre-flight checklist</li>
-            </ul>
-            <div class="wb-price">
-              <span class="price-big">FREE</span>
-              <span class="price-note">/ Instant PDF Download</span>
-            </div>
-            <button class="btn-gold" style="width:100%; justify-content:center;" onclick="document.getElementById('kaiaEmail').focus()">✦ Download Now</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── PREMIUM ── -->
-  <section class="premium-sec" id="kaia-premium">
-    <div class="wrap">
-      <div class="prem-header reveal">
-        <div class="prem-badge">✦ Coming Soon ✦</div>
-        <h2 class="sec-title">The Premium<br><span class="gold-text">Fear of Flying Workbook</span></h2>
-        <p class="sec-sub">A comprehensive 50+ page deep-dive with everything you need to fly with genuine, lasting confidence.</p>
-      </div>
-
-      <div class="feat-grid reveal">
-        <div class="feat-card"><div class="feat-icon">🧠</div><h3>Full CBT Programme</h3><p>Complete Cognitive Behavioural Therapy exercises — not just explanations, but real guided practice.</p></div>
-        <div class="feat-card"><div class="feat-icon">🪜</div><h3>Fear Ladder & Exposure</h3><p>Build your personalised exposure hierarchy using the gold-standard therapeutic approach.</p></div>
-        <div class="feat-card"><div class="feat-icon">🧘</div><h3>Meditation Scripts</h3><p>Guided visualisation scripts written specifically for takeoff, turbulence, and landing.</p></div>
-        <div class="feat-card"><div class="feat-icon">✈️</div><h3>Kaia's Insider Secrets</h3><p>What crew actually think during turbulence. Every sound explained. What they wish you knew.</p></div>
-        <div class="feat-card"><div class="feat-icon">📓</div><h3>Journal & Progress Tracker</h3><p>Dedicated pages to track every flight and witness your own transformation over time.</p></div>
-        <div class="feat-card"><div class="feat-icon">🌙</div><h3>Sleep & Nutrition Guide</h3><p>What to eat, drink, and do the night before your flight for the best possible foundation.</p></div>
-      </div>
-
-      <div class="cmp-table reveal">
-        <div class="cmp-head">
-          <div>What's included</div><div>Free</div><div class="col-p">Premium ✦</div>
-        </div>
-        <div class="cmp-row"><div>Anxiety profile & triggers</div><div><span class="ck">✦</span></div><div class="col-p"><span class="ck">✦</span></div></div>
-        <div class="cmp-row"><div>4-7-8 breathing method</div><div><span class="ck">✦</span></div><div class="col-p"><span class="ck">✦</span></div></div>
-        <div class="cmp-row"><div>Basic thought challenge</div><div><span class="ck">✦</span></div><div class="col-p"><span class="ck">✦</span></div></div>
-        <div class="cmp-row"><div>In-flight action plan</div><div><span class="ck">✦</span></div><div class="col-p"><span class="ck">✦</span></div></div>
-        <div class="cmp-row"><div>Full CBT workbook (6 sections)</div><div><span class="cx">—</span></div><div class="col-p"><span class="ck">✦</span></div></div>
-        <div class="cmp-row"><div>Fear Ladder & exposure therapy</div><div><span class="cx">—</span></div><div class="col-p"><span class="ck">✦</span></div></div>
-        <div class="cmp-row"><div>Meditation & visualisation scripts</div><div><span class="cx">—</span></div><div class="col-p"><span class="ck">✦</span></div></div>
-        <div class="cmp-row"><div>Kaia's crew insider tips</div><div><span class="cx">—</span></div><div class="col-p"><span class="ck">✦</span></div></div>
-        <div class="cmp-row"><div>Sleep & nutrition guide</div><div><span class="cx">—</span></div><div class="col-p"><span class="ck">✦</span></div></div>
-        <div class="cmp-row"><div>Progress tracker & journal (50+ pages)</div><div><span class="cx">—</span></div><div class="col-p"><span class="ck">✦</span></div></div>
-      </div>
-
-      <div class="prem-cta reveal">
-        <h3>Be the First to Know</h3>
-        <p>The Premium Workbook is coming soon. Leave your email and get early access at a special launch price.</p>
-        <div class="cs-label">✦ Coming Soon ✦</div>
-        <div class="notify-form">
-          <input type="email" placeholder="your@email.com" id="kaiaNotify">
-          <button onclick="kaiaNotifyMe()">Notify Me</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ── TESTIMONIALS ── -->
-  <section class="testi-sec">
-    <div class="wrap">
-      <div class="eyebrow reveal">What People Say</div>
-      <h2 class="sec-title reveal">Real Stories, <span class="gold-text">Real Confidence</span></h2>
-      <p class="sec-sub reveal">From people who discovered that flying doesn't have to be something you endure.</p>
-      <div class="testi-grid">
-        <div class="testi-card reveal">
-          <div class="stars">★ ★ ★ ★ ★</div>
-          <p class="testi-text">I used the 4-7-8 breathing on a flight to Barcelona. By cruising altitude my heart rate had completely settled. I couldn't believe it actually worked.</p>
-          <div class="testi-author"><strong>— Sophie M.</strong>Nervous flyer for 12 years</div>
+  <div style="background:#0F2235;border-top:1px solid rgba(200,151,58,0.2);padding:5rem 1.5rem;">
+    <div style="max-width:1100px;margin:0 auto;">
+      <div style="font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.4em;text-transform:uppercase;color:#C8973A;text-align:center;margin-bottom:0.8rem;">What People Say</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.9rem,3.5vw,3rem);font-weight:300;text-align:center;line-height:1.2;margin-bottom:0.5rem;">Real Stories, <span style="color:#E8B85A;">Real Confidence</span></h2>
+      <p style="text-align:center;font-size:0.75rem;color:rgba(138,155,176,0.6);margin-bottom:2.5rem;font-style:italic;">* Example reviews for illustration purposes</p>
+      <div style="display:flex;flex-wrap:wrap;gap:1.4rem;">
+        <div style="flex:1;min-width:260px;background:#0B1829;border:1px solid rgba(200,151,58,0.2);border-radius:3px;padding:1.8rem;position:relative;">
+          <div style="position:absolute;top:0.8rem;right:1.2rem;font-family:'Cormorant Garamond',serif;font-size:3.5rem;color:rgba(200,151,58,0.12);line-height:1;">"</div>
+          <div style="color:#C8973A;font-size:0.72rem;letter-spacing:0.1em;margin-bottom:0.9rem;">★ ★ ★ ★ ★</div>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:#FAF4EA;line-height:1.7;margin-bottom:1.3rem;">I used the 4-7-8 breathing on a flight to Barcelona. By cruising altitude my heart rate had completely settled. I couldn't believe it actually worked.</p>
+          <div style="font-size:0.78rem;color:#8A9BB0;"><strong style="color:#C8973A;font-weight:400;display:block;margin-bottom:0.15rem;">— Sophie M.</strong>Nervous flyer for 12 years</div>
         </div>
-        <div class="testi-card reveal">
-          <div class="stars">★ ★ ★ ★ ★</div>
-          <p class="testi-text">The thought-challenge exercise was a game changer. I realised my brain was treating turbulence as a threat when it's just physics. Kaia explains this so clearly.</p>
-          <div class="testi-author"><strong>— Thomas K.</strong>Business traveller, Frankfurt</div>
+        <div style="flex:1;min-width:260px;background:#0B1829;border:1px solid rgba(200,151,58,0.2);border-radius:3px;padding:1.8rem;position:relative;">
+          <div style="position:absolute;top:0.8rem;right:1.2rem;font-family:'Cormorant Garamond',serif;font-size:3.5rem;color:rgba(200,151,58,0.12);line-height:1;">"</div>
+          <div style="color:#C8973A;font-size:0.72rem;letter-spacing:0.1em;margin-bottom:0.9rem;">★ ★ ★ ★ ★</div>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:#FAF4EA;line-height:1.7;margin-bottom:1.3rem;">The thought-challenge exercise was a game changer. I realised my brain was treating turbulence as a threat when it's just physics. So clearly explained.</p>
+          <div style="font-size:0.78rem;color:#8A9BB0;"><strong style="color:#C8973A;font-weight:400;display:block;margin-bottom:0.15rem;">— Thomas K.</strong>Business traveller, Frankfurt</div>
         </div>
-        <div class="testi-card reveal">
-          <div class="stars">★ ★ ★ ★ ★</div>
-          <p class="testi-text">I've tried everything — medication, therapy, white-knuckling it. This workbook gave me something I could actually use in the moment. The crew tips alone were worth it.</p>
-          <div class="testi-author"><strong>— Anja R.</strong>Flew with her family for the first time</div>
+        <div style="flex:1;min-width:260px;background:#0B1829;border:1px solid rgba(200,151,58,0.2);border-radius:3px;padding:1.8rem;position:relative;">
+          <div style="position:absolute;top:0.8rem;right:1.2rem;font-family:'Cormorant Garamond',serif;font-size:3.5rem;color:rgba(200,151,58,0.12);line-height:1;">"</div>
+          <div style="color:#C8973A;font-size:0.72rem;letter-spacing:0.1em;margin-bottom:0.9rem;">★ ★ ★ ★ ★</div>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:#FAF4EA;line-height:1.7;margin-bottom:1.3rem;">I've tried everything — medication, therapy, white-knuckling it. This workbook gave me something I could actually use in the moment.</p>
+          <div style="font-size:0.78rem;color:#8A9BB0;"><strong style="color:#C8973A;font-weight:400;display:block;margin-bottom:0.15rem;">— Anja R.</strong>Flew with her family for the first time</div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-</div><!-- end .kaia-lp -->
+  <!-- ══════════════════════════════════════════
+       IMPRESSUM
+  ══════════════════════════════════════════ -->
+  <div id="kaia-impressum" style="background:#0B1829;border-top:1px solid rgba(200,151,58,0.15);padding:4rem 1.5rem;">
+    <div style="max-width:800px;margin:0 auto;">
+      <h2 style="font-family:'Cinzel',serif;font-size:1.4rem;letter-spacing:0.2em;color:#C8973A;margin-bottom:2rem;text-transform:uppercase;">Impressum</h2>
+      <p style="color:#8A9BB0;font-size:0.88rem;line-height:1.9;margin-bottom:0.5rem;"><strong style="color:#FAF4EA;">Angaben gemäß § 5 TMG</strong></p>
+      <p style="color:#8A9BB0;font-size:0.88rem;line-height:1.9;margin-bottom:1.5rem;">
+        Max Mustermann<br>
+        Musterstraße 1<br>
+        12345 Musterstadt<br>
+        Deutschland
+      </p>
+      <p style="color:#8A9BB0;font-size:0.88rem;line-height:1.9;margin-bottom:0.3rem;"><strong style="color:#FAF4EA;">Kontakt</strong></p>
+      <p style="color:#8A9BB0;font-size:0.88rem;line-height:1.9;margin-bottom:1.5rem;">
+        E-Mail: kontakt@mustermann.de<br>
+        Telefon: +49 (0) 123 456789
+      </p>
+      <p style="color:#8A9BB0;font-size:0.88rem;line-height:1.9;margin-bottom:0.3rem;"><strong style="color:#FAF4EA;">Hinweis zu KI-generierten Inhalten</strong></p>
+      <p style="color:#8A9BB0;font-size:0.88rem;line-height:1.9;margin-bottom:1.5rem;">
+        Die Figur „Kaia" ist ein KI-generierter Charakter. Sämtliche Bilder wurden mittels KI erstellt. Die Inhalte des Workbooks basieren auf realen Erkenntnissen aus Luftfahrt und Psychologie.
+      </p>
+      <p style="color:#8A9BB0;font-size:0.88rem;line-height:1.9;margin-bottom:0.3rem;"><strong style="color:#FAF4EA;">Haftungsausschluss</strong></p>
+      <p style="color:#8A9BB0;font-size:0.88rem;line-height:1.9;">
+        Die Inhalte dieses Angebots ersetzen keine professionelle psychologische oder medizinische Beratung. Bei schwerwiegenden Angstzuständen empfehlen wir die Konsultation eines Facharztes oder Psychotherapeuten.
+      </p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       DATENSCHUTZ
+  ══════════════════════════════════════════ -->
+  <div id="kaia-datenschutz" style="background:#0F2235;border-top:1px solid rgba(200,151,58,0.15);padding:4rem 1.5rem;">
+    <div style="max-width:800px;margin:0 auto;">
+      <h2 style="font-family:'Cinzel',serif;font-size:1.4rem;letter-spacing:0.2em;color:#C8973A;margin-bottom:2rem;text-transform:uppercase;">Datenschutzerklärung</h2>
+
+      <p style="color:#8A9BB0;font-size:0.88rem;line-height:1.9;margin-bottom:0.3rem;"><strong style="color:#FAF4EA;">1. Verantwortlicher</strong></p>
+      <p style="color:#8A9BB0;font-size:0.88rem;line-height:1.9;margin-bottom:1.5rem;">Max Mustermann, Musterstraße 1, 12345 Musterstadt · kontakt@mustermann.de</p>
+
+      <p style="color:#8A9BB0;font-size:0.88rem;line-height:1.9;margin-bottom:0.3rem;"><strong style="color:#FAF4EA;">2. Erhebung von Daten</strong></p>
+      <p style="color:#8A9BB0;font-size:0.88rem;line-height:1.9;margin-bottom:1.5rem;">Beim Besuch dieser Website werden automatisch Informationen erfasst (IP-Adresse, Browser, Betriebssystem). Bei der Newsletter-Anmeldung speichern wir Ihre E-Mail-Adresse zur Zusendung des Workbooks und weiterer Informationen.</p>
+
+      <p style="color:#8A9BB0;font-size:0.88rem;line-height:1.9;margin-bottom:0.3rem;"><strong style="color:#FAF4EA;">3. Google Analytics</strong></p>
+      <p style="color:#8A9BB0;font-size:0.88rem;line-height:1.9;margin-bottom:1.5rem;">Diese Website verwendet Google Analytics, einen Webanalysedienst der Google LLC. Google Analytics verwendet Cookies. Die Nutzung erfolgt nur nach Ihrer Zustimmung. Sie können der Verarbeitung jederzeit widersprechen. Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO.</p>
+
+      <p style="color:#8A9BB0;font-size:0.88rem;line-height:1.9;margin-bottom:0.3rem;"><strong style="color:#FAF4EA;">4. Systeme.io</strong></p>
+      <p style="color:#8A9BB0;font-size:0.88rem;line-height:1.9;margin-bottom:1.5rem;">Zur Verwaltung von E-Mail-Adressen und zum Versand des Workbooks nutzen wir Systeme.io. Ihre Daten werden ausschließlich für diesen Zweck verwendet und nicht an Dritte weitergegeben.</p>
+
+      <p style="color:#8A9BB0;font-size:0.88rem;line-height:1.9;margin-bottom:0.3rem;"><strong style="color:#FAF4EA;">5. Ihre Rechte</strong></p>
+      <p style="color:#8A9BB0;font-size:0.88rem;line-height:1.9;margin-bottom:1.5rem;">Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer Daten sowie das Recht auf Datenübertragbarkeit. Wenden Sie sich dazu an: kontakt@mustermann.de</p>
+
+      <p style="color:#8A9BB0;font-size:0.88rem;line-height:1.9;margin-bottom:0.3rem;"><strong style="color:#FAF4EA;">6. Abmeldung</strong></p>
+      <p style="color:#8A9BB0;font-size:0.88rem;line-height:1.9;">Sie können sich jederzeit vom Newsletter abmelden. Jede E-Mail enthält einen Abmelde-Link.</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       AGB
+  ══════════════════════════════════════════ -->
+  <div id="kaia-agb" style="background:#0B1829;border-top:1px solid rgba(200,151,58,0.15);padding:4rem 1.5rem;">
+    <div style="max-width:800px;margin:0 auto;">
+      <h2 style="font-family:'Cinzel',serif;font-size:1.4rem;letter-spacing:0.2em;color:#C8973A;margin-bottom:2rem;text-transform:uppercase;">Allgemeine Geschäftsbedingungen</h2>
+
+      <p style="color:#8A9BB0;font-size:0.88rem;line-height:1.9;margin-bottom:0.3rem;"><strong style="color:#FAF4EA;">1. Geltungsbereich</strong></p>
+      <p style="color:#8A9BB0;font-size:0.88rem;line-height:1.9;margin-bottom:1.5rem;">Diese AGB gelten für alle Käufe digitaler Produkte über diese Website zwischen Max Mustermann (Anbieter) und dem Kunden.</p>
+
+      <p style="color:#8A9BB0;font-size:0.88rem;line-height:1.9;margin-bottom:0.3rem;"><strong style="color:#FAF4EA;">2. Digitale Produkte</strong></p>
+      <p style="color:#8A9BB0;font-size:0.88rem;line-height:1.9;margin-bottom:1.5rem;">Die angebotenen Workbooks sind digitale Produkte im PDF-Format. Nach Kaufabschluss erhalten Sie einen Download-Link per E-Mail. Das Widerrufsrecht erlischt bei digitalen Inhalten mit Beginn des Downloads, sofern Sie dem ausdrücklich zugestimmt haben.</p>
+
+      <p style="color:#8A9BB0;font-size:0.88rem;line-height:1.9;margin-bottom:0.3rem;"><strong style="color:#FAF4EA;">3. Preise und Zahlung</strong></p>
+      <p style="color:#8A9BB0;font-size:0.88rem;line-height:1.9;margin-bottom:1.5rem;">Alle Preise verstehen sich inkl. der gesetzlichen Mehrwertsteuer. Die Zahlung erfolgt über die angebotenen Zahlungsdienstleister (Stripe / PayPal).</p>
+
+      <p style="color:#8A9BB0;font-size:0.88rem;line-height:1.9;margin-bottom:0.3rem;"><strong style="color:#FAF4EA;">4. Nutzungsrecht</strong></p>
+      <p style="color:#8A9BB0;font-size:0.88rem;line-height:1.9;margin-bottom:1.5rem;">Mit dem Kauf erwerben Sie ein einfaches, nicht übertragbares Nutzungsrecht für den persönlichen Gebrauch. Eine Weitergabe, Vervielfältigung oder kommerzielle Nutzung ist nicht gestattet.</p>
+
+      <p style="color:#8A9BB0;font-size:0.88rem;line-height:1.9;margin-bottom:0.3rem;"><strong style="color:#FAF4EA;">5. Haftung</strong></p>
+      <p style="color:#8A9BB0;font-size:0.88rem;line-height:1.9;margin-bottom:1.5rem;">Die Inhalte ersetzen keine professionelle psychologische Beratung. Der Anbieter übernimmt keine Haftung für den Erfolg der angewandten Techniken.</p>
+
+      <p style="color:#8A9BB0;font-size:0.88rem;line-height:1.9;margin-bottom:0.3rem;"><strong style="color:#FAF4EA;">6. Schlussbestimmungen</strong></p>
+      <p style="color:#8A9BB0;font-size:0.88rem;line-height:1.9;">Es gilt deutsches Recht. Gerichtsstand ist Musterstadt. Stand: Mai 2025.</p>
+    </div>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <div style="padding:2.5rem 1.5rem;border-top:1px solid rgba(200,151,58,0.2);background:#0B1829;">
+    <div style="max-width:1100px;margin:0 auto;text-align:center;">
+      <div style="font-family:'Cinzel',serif;font-size:1.1rem;color:#C8973A;letter-spacing:0.2em;margin-bottom:1rem;">KAIA ✦</div>
+      <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:1.5rem;margin-bottom:1rem;">
+        <a href="#kaia-impressum" style="font-size:0.76rem;color:#8A9BB0;text-decoration:none;letter-spacing:0.1em;text-transform:uppercase;">Impressum</a>
+        <a href="#kaia-datenschutz" style="font-size:0.76rem;color:#8A9BB0;text-decoration:none;letter-spacing:0.1em;text-transform:uppercase;">Datenschutz</a>
+        <a href="#kaia-agb" style="font-size:0.76rem;color:#8A9BB0;text-decoration:none;letter-spacing:0.1em;text-transform:uppercase;">AGB</a>
+      </div>
+      <p style="font-size:0.74rem;color:rgba(138,155,176,0.5);">Kaia ist ein KI-generierter Charakter. Alle Bilder wurden mittels KI erstellt.</p>
+      <p style="font-size:0.74rem;color:rgba(138,155,176,0.4);margin-top:0.3rem;">© 2025 Max Mustermann · Alle Rechte vorbehalten</p>
+    </div>
+  </div>
+
+</div><!-- end #kaia-wrap -->
 
 <script>
 (function(){
-  // Scroll reveal
-  var obs = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }
-    });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.kaia-lp .reveal').forEach(function(el){ obs.observe(el); });
 
-  // Trigger hero immediately
-  setTimeout(function(){
-    document.querySelectorAll('.kaia-lp .hero .reveal').forEach(function(el){ el.classList.add('visible'); });
-  }, 80);
+  // ── Cookie Banner Logic ──
+  var cookie = document.getElementById('kaia-cookie');
+  if (!localStorage.getItem('kaia-cookies')) {
+    setTimeout(function(){ cookie.style.display = 'flex'; }, 1500);
+  } else if (localStorage.getItem('kaia-cookies') === 'accepted') {
+    kaiaEnableAnalytics();
+  }
 
-  // Download handler — replace with your Systeme.io form action
-  window.kaiaDownload = function(){
+  window.kaiaCookieAccept = function() {
+    localStorage.setItem('kaia-cookies', 'accepted');
+    cookie.style.display = 'none';
+    kaiaEnableAnalytics();
+  };
+
+  window.kaiaCookieDecline = function() {
+    localStorage.setItem('kaia-cookies', 'declined');
+    cookie.style.display = 'none';
+  };
+
+  // ── Form handlers ──
+  window.kaiaDownload = function() {
     var email = document.getElementById('kaiaEmail').value;
-    if(!email || !email.includes('@')){
+    if (!email || !email.includes('@')) {
       document.getElementById('kaiaEmail').style.borderColor = '#e05a5a';
       return;
     }
-    // TODO: Replace with your Systeme.io form submission URL
-    alert('Thank you! Your free workbook is on its way to ' + email);
+    // TODO: Systeme.io Embed Code hier einfügen
+    alert('Danke! Dein kostenloses Workbook ist auf dem Weg zu ' + email);
+    if (kaiaAnalyticsEnabled) gtag('event', 'free_download', { email: email });
   };
 
-  // Notify handler
-  window.kaiaNotifyMe = function(){
+  window.kaiaNotifyMe = function() {
     var email = document.getElementById('kaiaNotify').value;
-    if(!email || !email.includes('@')) return;
-    alert('You\'re on the list! We\'ll notify you at ' + email);
+    if (!email || !email.includes('@')) return;
+    alert('Du bist auf der Liste! Wir benachrichtigen dich unter ' + email);
+    if (kaiaAnalyticsEnabled) gtag('event', 'premium_notify', { email: email });
   };
+
+  // ── Smooth scroll for anchor links ──
+  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      var target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
 })();
 </script>
